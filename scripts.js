@@ -32,7 +32,6 @@ function printInvoice() {
     const clientName = document.getElementById('client-name').value || "غير محدد";
     const totalAmount = document.getElementById('total-amount').textContent;
 
-    // استخراج محتوى الصفوف من الفاتورة الحالية
     const rows = document.querySelectorAll('#invoice-body tr');
     let rowsHtml = '';
     rows.forEach(row => {
@@ -46,7 +45,7 @@ function printInvoice() {
             <style>
                 body { font-family: 'Arial', sans-serif; direction: rtl; margin: 20px; }
                 .header { text-align: center; margin-bottom: 20px; position: relative; }
-                .logo { position: absolute; top: 0; ${/* تحديد المكان */ ''} right: 0; width: 100px; }
+                .logo { position: absolute; top: 0; right: 0; width: 100px; }
                 .invoice-details { margin: 20px 0; text-align: right; }
                 .invoice-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
                 .invoice-table th, .invoice-table td { padding: 10px; border: 1px solid #ddd; text-align: center; }
@@ -83,9 +82,16 @@ function printInvoice() {
         </html>
     `;
 
-    // فتح نافذة جديدة للطباعة
     const printWindow = window.open('', '', 'width=800,height=600');
     printWindow.document.write(invoiceHtml);
     printWindow.document.close();
+
+    // الانتظار قليلاً قبل إعادة التحميل
+    printWindow.onafterprint = function () {
+        setTimeout(() => {
+            location.reload();
+        }, 1000);
+    };
+
     printWindow.print();
 }
