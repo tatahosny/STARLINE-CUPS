@@ -44,8 +44,9 @@ function printInvoice() {
         <head>
             <title>فاتورة الحساب</title>
             <style>
-                body { font-family: 'Arial', sans-serif; direction: rtl; text-align: center; margin: 20px; }
-                .header { text-align: center; margin-bottom: 20px; }
+                body { font-family: 'Arial', sans-serif; direction: rtl; margin: 20px; }
+                .header { text-align: center; margin-bottom: 20px; position: relative; }
+                .logo { position: absolute; top: 0; ${/* تحديد المكان */ ''} right: 0; width: 100px; }
                 .invoice-details { margin: 20px 0; text-align: right; }
                 .invoice-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
                 .invoice-table th, .invoice-table td { padding: 10px; border: 1px solid #ddd; text-align: center; }
@@ -55,6 +56,7 @@ function printInvoice() {
         </head>
         <body>
             <div class="header">
+                <img src="logo.jpg" alt="Logo" class="logo">
                 <h1>فاتورة الحساب</h1>
                 <p>شركة الإنتاج: <strong>STAR LINE CUPS</strong></p>
             </div>
@@ -80,11 +82,10 @@ function printInvoice() {
         </body>
         </html>
     `;
-    
+
     // فتح نافذة جديدة للطباعة
     const printWindow = window.open('', '', 'width=800,height=600');
     printWindow.document.write(invoiceHtml);
     printWindow.document.close();
     printWindow.print();
 }
-
