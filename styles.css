@@ -1,0 +1,93 @@
+/* تخصيص مظهر الجسم العام */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 20px;
+    direction: rtl;
+    color: #333;
+}
+
+/* تخصيص حاوية اللوجو */
+.logo-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+/* تخصيص حجم اللوجو */
+.logo {
+    width: 100px;
+    height: auto;
+}
+
+/* تخصيص المدخلات لتكون في صف واحد */
+.input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+/* تخصيص الحقول */
+input[type="text"], input[type="number"] {
+    width: 45%;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+/* تخصيص الزر */
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* تخصيص جدول الفاتورة */
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.invoice-table th, .invoice-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.invoice-table th {
+    background-color: #1E90FF;
+    color: white;
+}
+
+.invoice-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* تخصيص إجمالي الفاتورة */
+.total-amount {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* تخصيص حاوية اسم الشركة المنتجة */
+.producer-company {
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: right;
+    font-weight: bold;
+}

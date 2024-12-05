@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فاتورة إلكترونية</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="logo.jpg" alt="Logo" class="logo">
+    </div>
+
+    <h1>فاتورة إلكترونية</h1>
+
+    <!-- اسم الشركة المنتجة (ثابت) -->
+    <div class="producer-company">
+        <p>شركة الإنتاج: <strong>STAR LINE CUPS</strong></p>
+    </div>
+
+    <!-- المدخلات للمستخدم -->
+    <div class="input-container">
+        <div>
+            <label for="company-name">اسم الشركة:</label>
+            <input type="text" id="company-name" placeholder="أدخل اسم الشركة" required>
+        </div>
+        <div>
+            <label for="client-name">اسم العميل:</label>
+            <input type="text" id="client-name" placeholder="أدخل اسم العميل" required>
+        </div>
+        <div>
+            <label for="item-name">اسم الصنف:</label>
+            <input type="text" id="item-name" placeholder="أدخل اسم الصنف" required>
+        </div>
+        <div>
+            <label for="item-size">المقاس:</label>
+            <input type="text" id="item-size" placeholder="أدخل المقاس" required>
+        </div>
+        <div>
+            <label for="item-price">السعر (بالجنيه):</label>
+            <input type="number" id="item-price" placeholder="أدخل السعر" required>
+        </div>
+        <div>
+            <label for="item-quantity">العدد:</label>
+            <input type="number" id="item-quantity" placeholder="أدخل العدد" required>
+        </div>
+
+        <button type="button" onclick="addToInvoice()">إضافة إلى الفاتورة</button>
+    </div>
+
+    <!-- عرض الفاتورة -->
+    <div class="invoice-header">
+        <h2>فاتورة رقم: <span id="invoice-number">12345</span></h2>
+        <p>تاريخ الفاتورة: <span id="invoice-date">2024-12-05</span></p>
+    </div>
+
+    <div class="invoice-details">
+        <div>اسم العميل: <span id="client-name-display"></span></div>
+        <div>اسم الشركة: <span id="company-name-display"></span></div>
+    </div>
+
+    <h3>تفاصيل الفاتورة</h3>
+    <table class="invoice-table">
+        <thead>
+            <tr>
+                <th>اسم الصنف</th>
+                <th>المقاس</th>
+                <th>السعر (جنيه)</th>
+                <th>العدد</th>
+                <th>المجموع (جنيه)</th>
+            </tr>
+        </thead>
+        <tbody id="invoice-body">
+            <!-- الصفوف ستضاف هنا ديناميكياً -->
+        </tbody>
+    </table>
+
+    <div class="total-amount">
+        إجمالي الفاتورة: <span id="total-amount">0</span> جنيه
+    </div>
+
+    <button type="button" onclick="printInvoice()">طباعة الفاتورة PDF</button>
+
+    <div class="footer">
+        <p>شكراً لتعاملكم معنا!</p>
+        <p>يرجى التواصل معنا عبر البريد الإلكتروني أو الهاتف لأي استفسار.</p>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
