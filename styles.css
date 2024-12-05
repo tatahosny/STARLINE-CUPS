@@ -1,93 +1,91 @@
-/* تخصيص مظهر الجسم العام */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
-    margin: 20px;
-    direction: rtl;
-    color: #333;
-}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فاتورة الحساب</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="logo.jpg" alt="Logo" class="logo">
+    </div>
 
-/* تخصيص حاوية اللوجو */
-.logo-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
+    <h1>فاتورة إلكترونية</h1>
 
-/* تخصيص حجم اللوجو */
-.logo {
-    width: 100px;
-    height: auto;
-}
+    <!-- اسم الشركة المنتجة (ثابت) -->
+    <div class="producer-company">
+        <p>شركة الإنتاج: <strong>STAR LINE CUPS</strong></p>
+    </div>
 
-/* تخصيص المدخلات لتكون في صف واحد */
-.input-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: space-between;
-}
+    <!-- المدخلات للمستخدم -->
+    <div class="input-container">
+        <div>
+            <label for="company-name">اسم الشركة:</label>
+            <input type="text" id="company-name" placeholder="أدخل اسم الشركة" required>
+        </div>
+        <div>
+            <label for="client-name">اسم العميل:</label>
+            <input type="text" id="client-name" placeholder="أدخل اسم العميل" required>
+        </div>
+        <div>
+            <label for="item-name">اسم الصنف:</label>
+            <input type="text" id="item-name" placeholder="أدخل اسم الصنف" required>
+        </div>
+        <div>
+            <label for="item-size">المقاس:</label>
+            <input type="text" id="item-size" placeholder="أدخل المقاس" required>
+        </div>
+        <div>
+            <label for="item-price">السعر (بالجنيه):</label>
+            <input type="number" id="item-price" placeholder="أدخل السعر" required>
+        </div>
+        <div>
+            <label for="item-quantity">العدد:</label>
+            <input type="number" id="item-quantity" placeholder="أدخل العدد" required>
+        </div>
 
-/* تخصيص الحقول */
-input[type="text"], input[type="number"] {
-    width: 45%;
-    padding: 10px;
-    margin: 5px 0;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-}
+        <button type="button" onclick="addToInvoice()">إضافة إلى الفاتورة</button>
+    </div>
 
-/* تخصيص الزر */
-button {
-    padding: 12px 20px;
-    font-size: 16px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
+    <!-- عرض الفاتورة -->
+    <div class="invoice-header">
+        <h2>فاتورة رقم: <span id="invoice-number">12345</span></h2>
+        <p>تاريخ الفاتورة: <span id="invoice-date">2024-12-05</span></p>
+    </div>
 
-button:hover {
-    background-color: #218838;
-}
+    <div class="invoice-details">
+        <div>اسم العميل: <span id="client-name-display"></span></div>
+        <div>اسم الشركة: <span id="company-name-display"></span></div>
+    </div>
 
-/* تخصيص جدول الفاتورة */
-.invoice-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
+    <h3>تفاصيل الفاتورة</h3>
+    <table class="invoice-table">
+        <thead>
+            <tr>
+                <th>اسم الصنف</th>
+                <th>المقاس</th>
+                <th>السعر (جنيه)</th>
+                <th>العدد</th>
+                <th>المجموع (جنيه)</th>
+            </tr>
+        </thead>
+        <tbody id="invoice-body">
+            <!-- الصفوف ستضاف هنا ديناميكياً -->
+        </tbody>
+    </table>
 
-.invoice-table th, .invoice-table td {
-    padding: 12px;
-    text-align: center;
-    border: 1px solid #ddd;
-}
+    <div class="total-amount">
+        إجمالي الفاتورة: <span id="total-amount">0</span> جنيه
+    </div>
 
-.invoice-table th {
-    background-color: #1E90FF;
-    color: white;
-}
+    <button type="button" onclick="printInvoice()">طباعة الفاتورة PDF</button>
 
-.invoice-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
+    <div class="footer">
+        <p>شكراً لتعاملكم معنا!</p>
+        <p>يرجى التواصل معنا عبر البريد الإلكتروني أو الهاتف لأي استفسار.</p>
+    </div>
 
-/* تخصيص إجمالي الفاتورة */
-.total-amount {
-    text-align: right;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 20px;
-}
-
-/* تخصيص حاوية اسم الشركة المنتجة */
-.producer-company {
-    font-size: 18px;
-    margin-bottom: 15px;
-    text-align: right;
-    font-weight: bold;
-}
+    <script src="scripts.js"></script>
+</body>
+</html>
