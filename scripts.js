@@ -28,32 +28,39 @@ function addToInvoice() {
 
 
 function printInvoice() {
-    const companyName = document.getElementById('company-name').value;
-    const clientName = document.getElementById('client-name').value;
+    const companyName = document.getElementById('company-name').value || "غير محدد";
+    const clientName = document.getElementById('client-name').value || "غير محدد";
     const totalAmount = document.getElementById('total-amount').textContent;
-    
+
+    // استخراج محتوى الصفوف من الفاتورة الحالية
+    const rows = document.querySelectorAll('#invoice-body tr');
+    let rowsHtml = '';
+    rows.forEach(row => {
+        rowsHtml += `<tr>${row.innerHTML}</tr>`;
+    });
+
     const invoiceHtml = `
         <html>
         <head>
-            <title>فاتورة إلكترونية</title>
+            <title>فاتورة الحساب</title>
             <style>
-                body { font-family: 'Arial', sans-serif; }
-                .header { text-align: center; }
-                .invoice-details { margin: 20px 0; }
-                .invoice-table { width: 100%; border-collapse: collapse; }
+                body { font-family: 'Arial', sans-serif; direction: rtl; text-align: center; margin: 20px; }
+                .header { text-align: center; margin-bottom: 20px; }
+                .invoice-details { margin: 20px 0; text-align: right; }
+                .invoice-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
                 .invoice-table th, .invoice-table td { padding: 10px; border: 1px solid #ddd; text-align: center; }
                 .invoice-table th { background-color: #1E90FF; color: white; }
-                .total-amount { font-size: 20px; font-weight: bold; }
+                .total-amount { font-size: 20px; font-weight: bold; text-align: right; margin-top: 20px; }
             </style>
         </head>
         <body>
             <div class="header">
-                <h1>فاتورة إلكترونية</h1>
-                <p>شركة الإنتاج: <strong>شركة النجوم للتجارة</strong></p>
+                <h1>فاتورة الحساب</h1>
+                <p>شركة الإنتاج: <strong>STAR LINE CUPS</strong></p>
             </div>
             <div class="invoice-details">
-                <p>اسم العميل: ${clientName}</p>
-                <p>اسم الشركة: ${companyName}</p>
+                <p><strong>اسم العميل:</strong> ${clientName}</p>
+                <p><strong>اسم الشركة:</strong> ${companyName}</p>
             </div>
             <table class="invoice-table">
                 <thead>
@@ -65,8 +72,8 @@ function printInvoice() {
                         <th>المجموع (جنيه)</th>
                     </tr>
                 </thead>
-                <tbody id="invoice-body">
-                    <!-- سيتم إضافة تفاصيل الفاتورة هنا -->
+                <tbody>
+                    ${rowsHtml}
                 </tbody>
             </table>
             <div class="total-amount">إجمالي الفاتورة: ${totalAmount} جنيه</div>
@@ -74,8 +81,10 @@ function printInvoice() {
         </html>
     `;
     
+    // فتح نافذة جديدة للطباعة
     const printWindow = window.open('', '', 'width=800,height=600');
     printWindow.document.write(invoiceHtml);
     printWindow.document.close();
     printWindow.print();
 }
+
