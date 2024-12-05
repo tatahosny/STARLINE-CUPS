@@ -1,91 +1,91 @@
-function addToInvoice() {
-    const itemName = document.getElementById('item-name').value;
-    const itemSize = document.getElementById('item-size').value;
-    const itemPrice = parseFloat(document.getElementById('item-price').value);
-    const itemQuantity = parseInt(document.getElementById('item-quantity').value);
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فاتورة الحساب</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="logo.jpg" alt="Logo" class="logo">
+    </div>
 
-    if (!itemName || !itemSize || isNaN(itemPrice) || isNaN(itemQuantity)) {
-        alert("يرجى إدخال بيانات صحيحة.");
-        return;
-    }
+    <h1>فاتورة إلكترونية</h1>
 
-    const invoiceBody = document.getElementById('invoice-body');
-    const newRow = document.createElement('tr');
-    const totalRowPrice = itemPrice * itemQuantity;
+    <!-- اسم الشركة المنتجة (ثابت) -->
+    <div class="producer-company">
+        <p>شركة الإنتاج: <strong>STAR LINE CUPS</strong></p>
+    </div>
 
-    newRow.innerHTML = `
-        <td>${itemName}</td>
-        <td>${itemSize}</td>
-        <td>${itemPrice.toFixed(2)}</td>
-        <td>${itemQuantity}</td>
-        <td>${totalRowPrice.toFixed(2)}</td>
-    `;
-    invoiceBody.appendChild(newRow);
+    <!-- المدخلات للمستخدم -->
+    <div class="input-container">
+        <div>
+            <label for="company-name">اسم الشركة:</label>
+            <input type="text" id="company-name" placeholder="أدخل اسم الشركة" required>
+        </div>
+        <div>
+            <label for="client-name">اسم العميل:</label>
+            <input type="text" id="client-name" placeholder="أدخل اسم العميل" required>
+        </div>
+        <div>
+            <label for="item-name">اسم الصنف:</label>
+            <input type="text" id="item-name" placeholder="أدخل اسم الصنف" required>
+        </div>
+        <div>
+            <label for="item-size">المقاس:</label>
+            <input type="text" id="item-size" placeholder="أدخل المقاس" required>
+        </div>
+        <div>
+            <label for="item-price">السعر (بالجنيه):</label>
+            <input type="number" id="item-price" placeholder="أدخل السعر" required>
+        </div>
+        <div>
+            <label for="item-quantity">العدد:</label>
+            <input type="number" id="item-quantity" placeholder="أدخل العدد" required>
+        </div>
 
-    const totalAmount = document.getElementById('total-amount');
-    totalAmount.textContent = (parseFloat(totalAmount.textContent) + totalRowPrice).toFixed(2);
-}
+        <button type="button" onclick="addToInvoice()">إضافة إلى الفاتورة</button>
+    </div>
 
+    <!-- عرض الفاتورة -->
+    <div class="invoice-header">
+        <h2>فاتورة رقم: <span id="invoice-number">12345</span></h2>
+        <p>تاريخ الفاتورة: <span id="invoice-date">2024-12-05</span></p>
+    </div>
 
-function printInvoice() {
-    const companyName = document.getElementById('company-name').value || "غير محدد";
-    const clientName = document.getElementById('client-name').value || "غير محدد";
-    const totalAmount = document.getElementById('total-amount').textContent;
+    <div class="invoice-details">
+        <div>اسم العميل: <span id="client-name-display"></span></div>
+        <div>اسم الشركة: <span id="company-name-display"></span></div>
+    </div>
 
-    // استخراج محتوى الصفوف من الفاتورة الحالية
-    const rows = document.querySelectorAll('#invoice-body tr');
-    let rowsHtml = '';
-    rows.forEach(row => {
-        rowsHtml += `<tr>${row.innerHTML}</tr>`;
-    });
+    <h3>تفاصيل الفاتورة</h3>
+    <table class="invoice-table">
+        <thead>
+            <tr>
+                <th>اسم الصنف</th>
+                <th>المقاس</th>
+                <th>السعر (جنيه)</th>
+                <th>العدد</th>
+                <th>المجموع (جنيه)</th>
+            </tr>
+        </thead>
+        <tbody id="invoice-body">
+            <!-- الصفوف ستضاف هنا ديناميكياً -->
+        </tbody>
+    </table>
 
-    const invoiceHtml = `
-        <html>
-        <head>
-            <title>فاتورة الحساب</title>
-            <style>
-                body { font-family: 'Arial', sans-serif; direction: rtl; margin: 20px; }
-                .header { text-align: center; margin-bottom: 20px; position: relative; }
-                .logo { position: absolute; top: 0; ${/* تحديد المكان */ ''} right: 0; width: 100px; }
-                .invoice-details { margin: 20px 0; text-align: right; }
-                .invoice-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-                .invoice-table th, .invoice-table td { padding: 10px; border: 1px solid #ddd; text-align: center; }
-                .invoice-table th { background-color: #1E90FF; color: white; }
-                .total-amount { font-size: 20px; font-weight: bold; text-align: right; margin-top: 20px; }
-            </style>
-        </head>
-        <body>
-            <div class="header">
-                <img src="logo.jpg" alt="Logo" class="logo">
-                <h1>فاتورة الحساب</h1>
-                <p>شركة الإنتاج: <strong>STAR LINE CUPS</strong></p>
-            </div>
-            <div class="invoice-details">
-                <p><strong>اسم العميل:</strong> ${clientName}</p>
-                <p><strong>اسم الشركة:</strong> ${companyName}</p>
-            </div>
-            <table class="invoice-table">
-                <thead>
-                    <tr>
-                        <th>اسم الصنف</th>
-                        <th>المقاس</th>
-                        <th>السعر (جنيه)</th>
-                        <th>العدد</th>
-                        <th>المجموع (جنيه)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${rowsHtml}
-                </tbody>
-            </table>
-            <div class="total-amount">إجمالي الفاتورة: ${totalAmount} جنيه</div>
-        </body>
-        </html>
-    `;
+    <div class="total-amount">
+        إجمالي الفاتورة: <span id="total-amount">0</span> جنيه
+    </div>
 
-    // فتح نافذة جديدة للطباعة
-    const printWindow = window.open('', '', 'width=800,height=600');
-    printWindow.document.write(invoiceHtml);
-    printWindow.document.close();
-    printWindow.print();
-}
+    <button type="button" onclick="printInvoice()">طباعة الفاتورة PDF</button>
+
+    <div class="footer">
+        <p>شكراً لتعاملكم معنا!</p>
+        <p>يرجى التواصل معنا عبر البريد الإلكتروني أو الهاتف لأي استفسار.</p>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
