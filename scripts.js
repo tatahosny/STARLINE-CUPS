@@ -51,6 +51,8 @@ function printInvoice() {
                 .invoice-table th, .invoice-table td { padding: 10px; border: 1px solid #ddd; text-align: center; }
                 .invoice-table th { background-color: #1E90FF; color: white; }
                 .total-amount { font-size: 20px; font-weight: bold; text-align: right; margin-top: 20px; }
+                .contact-info { text-align: right; margin-top: 30px; font-size: 16px; }
+                .contact-info p { margin: 5px 0; }
             </style>
         </head>
         <body>
@@ -78,6 +80,11 @@ function printInvoice() {
                 </tbody>
             </table>
             <div class="total-amount">إجمالي الفاتورة: ${totalAmount} جنيه</div>
+            <!-- إضافة معلومات الاتصال -->
+            <div class="contact-info">
+                <p><strong>للتواصل:</strong></p>
+                <p>الهاتف: <strong> 01092834929 - 01062263528 - 01208969129 </strong></p>
+            </div>
         </body>
         </html>
     `;
@@ -85,13 +92,5 @@ function printInvoice() {
     const printWindow = window.open('', '', 'width=800,height=600');
     printWindow.document.write(invoiceHtml);
     printWindow.document.close();
-
-    // الانتظار قليلاً قبل إعادة التحميل
-    printWindow.onafterprint = function () {
-        setTimeout(() => {
-            location.reload();
-        }, 1000);
-    };
-
     printWindow.print();
 }
